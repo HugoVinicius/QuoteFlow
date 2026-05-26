@@ -3,21 +3,25 @@ import Login from './pages/Login';
 import DashboardLayout from './layouts/DashboardLayout';
 import { Plus, TrendingUp, Users, CheckCircle, Clock } from 'lucide-react';
 
-function StatCard({ label, value, icon: Icon, trend, color }) {
+function StatCard({ label, value, icon: Icon, trend, color, accent }) {
   return (
-    <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-      <div className="flex justify-between items-start mb-4">
-        <div className={`p-3 rounded-xl ${color}`}>
+    <div className="bg-white/80 backdrop-blur-md p-7 rounded-[28px] border border-slate-200/50 shadow-sm hover:shadow-xl hover:shadow-slate-200/40 transition-all duration-500 group relative overflow-hidden">
+      <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${accent} opacity-5 -mr-8 -mt-8 rounded-full group-hover:scale-150 transition-transform duration-700`}></div>
+      
+      <div className="flex justify-between items-start mb-5 relative z-10">
+        <div className={`p-4 rounded-2xl ${color} shadow-sm group-hover:scale-110 transition-transform duration-500`}>
           <Icon className="w-6 h-6" />
         </div>
         {trend && (
-          <span className="text-green-600 bg-green-50 px-2 py-1 rounded-lg text-xs font-bold">
+          <span className="text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full text-xs font-black tracking-wider shadow-sm">
             {trend}
           </span>
         )}
       </div>
-      <p className="text-gray-500 text-sm font-medium mb-1">{label}</p>
-      <h3 className="text-2xl font-bold text-gray-900">{value}</h3>
+      <div className="relative z-10">
+         <p className="text-slate-400 text-sm font-bold uppercase tracking-widest mb-1">{label}</p>
+         <h3 className="text-3xl font-black text-slate-800 tracking-tight">{value}</h3>
+      </div>
     </div>
   );
 }
@@ -36,32 +40,36 @@ function DashboardOverview() {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <StatCard 
           label="Total Vendido" 
           value="R$ 12.450,00" 
           icon={TrendingUp} 
           trend="+12%" 
-          color="bg-brand-50 text-brand-600"
+          color="bg-brand-600 text-white"
+          accent="from-brand-500 to-brand-900"
         />
         <StatCard 
-          label="Orçamentos Ativos" 
-          value="24" 
+          label="Orçamentos" 
+          value="24 Ativos" 
           icon={Clock} 
-          color="bg-orange-50 text-orange-600"
+          color="bg-amber-500 text-white"
+          accent="from-amber-400 to-orange-600"
         />
         <StatCard 
-          label="Clientes Novos" 
-          value="8" 
+          label="Clientes" 
+          value="08 Novos" 
           icon={Users} 
-          trend="+3" 
-          color="bg-blue-50 text-blue-600"
+          trend="+03" 
+          color="bg-indigo-600 text-white"
+          accent="from-indigo-400 to-indigo-900"
         />
         <StatCard 
-          label="Taxa de Fechamento" 
-          value="64%" 
+          label="Aprovação" 
+          value="64.5%" 
           icon={CheckCircle} 
-          color="bg-green-50 text-green-600"
+          color="bg-emerald-600 text-white"
+          accent="from-emerald-400 to-teal-900"
         />
       </div>
 
